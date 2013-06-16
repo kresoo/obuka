@@ -12,51 +12,54 @@ foreach ($orders as $order){
 
 ?>
 <?php require_once 'includes/header.php'; ?>
-<h1> Web Store </h1>
-<h2> My Account </h2>
-<div>
-    <b> Name: </b> <br />
-    <div> <?php echo $user->firstname ?> </div> <br />
-    <b>Lastname:</b> <br />
-    <div> <?php echo $user->lastname ?> </div> <br />
-    <b>Email address:</b> <br />
-    <div> <?php echo $user->email ?> </div> <br />
-    <b> Orders: </b> <br />
-    <table>
-        <th> Order ID </th>
+<div class="container">
+<header class="hero-unit">
+    <h1> Web Store </h1>
+    <h2> My <span style="color:#2CB7F2;"> Account </span> </h2>
+</header>
+<div style="width:600px;margin: 0 auto;">
+    <h3> Name: </h3> 
+    <div><span style="color:#2CB7F2;"> <?php echo $user->firstname ?> </span></div> <br />
+    <h3>Lastname:</h3> 
+    <div> <span style="color:#2CB7F2;"><?php echo $user->lastname ?> </span></div> <br />
+    <h3>Email address:</h3> 
+    <div> <span style="color:#2CB7F2;"><?php echo $user->email ?> </span></div> <br />
+    <h3> Orders: </h3> <br />
+    <table class="table table-bordered">
+        
         <th> Products </th>
         <th> Quantity </th>
         <th> Price of each product </th>
         <th> Total price </th>
         <?php foreach ($orders as $order): ?>
             <tr> 
-                <td style="border:1px solid red;"> 
+                <td > 
                     <?php 
                         for($i=0;$i<count($order->items);$i++){
                              echo $order->items[$i]->name . "<br />";
                         } 
                     ?> 
                 </td>
-                <td style="border:1px solid red;"> 
+                <td > 
                     <?php 
                         for($i=0;$i<count($order->items);$i++){
                              echo $order->items[$i]->qty . "<br />";
                         } 
                     ?> 
                 </td>
-                <td style="border:1px solid red;"> 
+                <td > 
                     <?php 
                         for($i=0;$i<count($order->items);$i++){
-                             echo $order->items[$i]->price . "<br />";
+                             echo $order->items[$i]->price . "$<br />";
                         } 
                     ?> 
                 </td>
-                <td style="border:1px solid red;"> <?php echo $order->total_price; ?></td>
+                <td > <?php echo $order->total_price . "$"; ?></td>
             </tr>
         <?php endforeach; ?>
     </table>
 </div>
-<br />
-<a href="index.php">&laquo; Back to Home </a>
+    <a href="index.php">&laquo; Back to Home </a>
+</div>
 <?php require_once 'includes/footer.php'; ?>
 
