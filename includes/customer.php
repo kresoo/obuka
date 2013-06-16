@@ -9,6 +9,7 @@ class Customer extends databaseObject {
     public $password;
     public $email;
     public $errorArray = array();
+    
     public static $table_name = "customer";
     public static $table_fields = array("id", "firstname", "lastname", "username", "password", "email");
 

@@ -1,0 +1,15 @@
+body{
+    font-family: Segoe UI;
+    color:#ABABAB;
+    font-weight: bold;
+    background: #F5F5F5;
+}
+
+hr{
+    background-color: #2CB7F2;
+    height: 1px;
+    border:none;
+}   
+
+table th { background: #ABABAB;color:white; }
+table td { text-align: center; }

@@ -30,24 +30,34 @@
     
 ?>
 <?php require_once 'includes/header.php'; ?>
-        <h1> Web Store </h1>
-        <div> <?php echo $fullname . "<br />"; echo $logout ; echo $myAccount ?> </div>
-        <div> <?php echo $login ?> </div>
-        <br />
-        <ul>
-            <?php foreach ($categories as $category): ?>
-                <li style="display: inline-block;margin-right: 10px;"> <a href="index.php?category_id=<?php echo $category->id ?>"> <?php echo $category->name; ?> </a>  </li>
-            <?php endforeach;?>
-        </ul>
-        <?php if(!empty($products)){ ?>
-            <ul>
+    <div class="container">
+        <div class="hero-unit" style="height:70px;">
+                <h1 class="pull-left"> Web Store </h1>
+                <div class="pull-right">
+                    <div> <?php echo $fullname . "<br />"; echo $logout ; echo $myAccount ?> </div>
+                    <div> <?php echo $login ?> </div>
+                </div>
+        </div>
+        <nav class="navbar">
+            <div class="navbar-inner">
+            <ul class="nav">
+                <?php foreach ($categories as $category): ?>
+                    <li style="display: inline-block;margin-right: 10px;"> <a href="index.php?category_id=<?php echo $category->id ?>"> <?php echo $category->name; ?> </a>  </li>
+                <?php endforeach;?>
+            </ul>
+            </div>
+        </nav>
+        <?php if(!empty($products)){ echo "Products: <br /><br />"; ?>
+            <ul class="thumbnails">
                 <?php foreach ($products as $product): ?>
-                    <li> <a href="productView.php?product_id=<?php echo $product->id ?>"> <?php echo $product->name ?>  </a> </li>
+                    <li class="span12 thumbnail"> <a href="productView.php?product_id=<?php echo $product->id ?>"> <?php echo $product->name ?>  </a> </li>
                 <?php endforeach; ?>
             </ul>
         <?php } else { $allProducts = Product::findRandomProducts(5); ?>
+            <div style="margin:0 auto;width:800px;">
             <?php foreach ($allProducts as $product): ?>
-                  <div style="border: 1px solid grey;padding:5px;width:300px;float:left;"> 
+        
+                  <div style="border:1px solid #2CB7F2;width:250px;float: left;padding: 20px;margin:20px;"> 
                     <h2> <?php echo $product->name ?> </h2>
                     <hr />
                     About product: <br />
@@ -79,5 +89,6 @@
                 </div>
             <?php endforeach; ?>
         <?php } ?>
-
+        </div>
+    </div>
 <?php require_once 'includes/footer.php'; ?>

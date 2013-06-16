@@ -1,11 +1,17 @@
 <?php require_once 'includes/require.php'; ?>
 <?php
-echo "<pre>";
-        $message = "";
-        print_r($_POST);
-        echo $_SESSION['items']."<br</>";
-        print_r($_SESSION['customer_info']);
+     
     if(isset($_POST['order_confirm'])){
+        
+            if(empty($_POST['shipping_info'])){
+                $session->message("You must provide shipping address.");
+                redirect("checkout.php");
+            }
+            if(empty($_POST['payment_info'])){
+                $session->message("You must provide payment info.");
+                redirect("checkout.php");
+            }
+        
        $order = new Order();
        $order->total_price = $_POST['total_price'];
        $order->items=$_SESSION['items'];

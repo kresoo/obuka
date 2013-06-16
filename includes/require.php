@@ -1,4 +1,6 @@
 <?php
+
+require_once 'includes/functions.php';
 require_once 'includes/database.php';
 require_once 'includes/databaseObject.php';
 require_once 'includes/customer.php';

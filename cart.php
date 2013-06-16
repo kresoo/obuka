@@ -40,14 +40,18 @@ if(array_key_exists("addToCart", $_POST)){
 }
 ?>
 <?php require_once 'includes/header.php'; ?>
-<h1> Web Store </h1>
-<h2> My Cart,<small> <?php echo $user->fullname(); ?> </small> </h2>
-<table>
+<div class="container">
+<header class="hero-unit" >
+    <h1> Web Store </h1>
+    <h2> My Cart,<small style="color: #2CB7F2;"> <?php echo $user->fullname(); ?> </small> </h2>
+</header>
+    <table class="table">
     <tr>
         <th> Product name </th>
         <th> Barcode </th>
         <th> Quantity </th>
         <th> Price </th>
+        <th>  </th>
     </tr>
     <?php foreach ($allProducts as $item) : ?>
         <tr> 
@@ -58,7 +62,7 @@ if(array_key_exists("addToCart", $_POST)){
             <td> 
                 <form action="cart.php" method="POST">
                     <input type="hidden" name="item_id" value="<?php echo $item->id ?>" />
-                    <input type="submit" name="remove" value="Remove" />
+                    <input class="btn btn-danger" type="submit" name="remove" value="Remove" />
                 </form>
             </td>
         </tr>
@@ -71,18 +75,13 @@ if(array_key_exists("addToCart", $_POST)){
                     foreach ($allProducts as $item){ 
                         $total += $_SESSION['cart'][$item->id] * $item->price;  
                     }
-                    echo $total;
+                    echo $total. "$";
                 ?>
             </td>
         </tr>
-        <tr>
-            <td></td> <td></td> <td></td> <td></td>
-            <td>
-                <form action="checkout.php" method="POST">
-                    <input type="submit" name="checkout" value="Checkout" />
-                </form>
-            </td>
-        </tr>
-</table>
-
+    </table>
+    <form action="checkout.php" method="POST">
+          <input class="btn btn-primary btn-large" type="submit" name="checkout" value="Checkout" />
+      </form>
+</div>
 <?php require_once 'includes/footer.php'; ?>
