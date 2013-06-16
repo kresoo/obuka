@@ -15,12 +15,16 @@
             <td> User ID </td> 
             <td> Payment method </td> 
             <td> Price </td>
+            <td> Customer name </td>
+            <td> Customer email address </td>
         </tr>
         <tr>
             <td> <input class="searchRadio" search_string="Order ID:" type="radio" name="search_by" value="id" checked="checked"/> </td>
             <td> <input class="searchRadio" search_string="User ID:" type="radio" name="search_by" value="user_id" /> </td>
             <td> <input class="searchRadio" search_string="Payment method:" type="radio" name="search_by" value="payment_info" /> </td>
             <td> <input class="searchRadio" id="price" search_string="Price range:" type="radio" name="search_by" value="total_price" /> </td>
+            <td> <input class="searchRadio" search_string="Customer name:" type="radio" name="search_by" value="customer_name" /> </td>
+            <td> <input class="searchRadio" search_string="Customer email address:" type="radio" name="search_by" value="customer_email" /> </td>
         </tr>
     </table>
     <br />

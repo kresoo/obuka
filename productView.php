@@ -13,7 +13,7 @@
         <ul>
             <li> Description: </li>
             <ul>
-                <li style="list-style: none;"> <?php echo $product->desc ?> </li>
+                <li style="list-style: none;"> <?php echo $product->description ?> </li>
             </ul>
         </ul>
         <ul>

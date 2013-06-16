@@ -44,15 +44,17 @@ foreach ($ids as $id) {
                     <?php endforeach; ?>
                     <?php
                     foreach ($products as $product) {
-                        $product->qty = $_SESSION['cart'][$product->id];
+                        foreach ($ids as $id){
+                            if($product->id == $id){
+                                $product->qty = $_SESSION['cart'][$product->id];
+                            }
+                        }
                     }
-                    $items = "";
-                    foreach ($products as $product) {
-                        $items .= $product->name . "," . $product->qty . "," . $product->price . "," . $product->id . "|";
-                    }
+                    $serializedProds = serialize($products);
+                    $_SESSION['items'] = $serializedProds;
                     ?>
                 </table>
-                <input type="hidden" name="items" value="<?php echo $items ?>" />
+                
 
             </ul>
             <br />
@@ -73,9 +75,11 @@ foreach ($ids as $id) {
                 <?php echo $user->fullname(); ?> <br />
                 <?php echo $user->email; ?>
                 <?php
-                $customer_info = $user->fullname() . "," . $user->email;
+                $customer_info = array();
+                $customer_info[] = $user->fullname();
+                $customer_info[] = $user->email;
+                $_SESSION['customer_info'] = serialize($customer_info);
                 ?>
-                <input type="hidden" name="customer_info" value="<?php echo $customer_info; ?>" />
             </ul>
             <br />
             <li> Shipping info </li>

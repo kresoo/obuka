@@ -64,7 +64,7 @@ if (!empty($_POST['product_change'])) {
         }
         $productUpdate->$key = $value;
     }
-    $productUpdate->category_id = implode(",",$_POST['category_id']);
+    $productUpdate->category_id = implode(",", $_POST['category_id']);
     if ($productUpdate->update()) {
         redirect("../admin_main.php?allProd");
     }
@@ -118,7 +118,8 @@ if (!empty($_POST['create_product'])) {
         redirect("../admin_main.php?createProd");
     }
     if (!isset($_POST['category_id'])) {
-        $session->message("Choose at least one product category.");;
+        $session->message("Choose at least one product category.");
+        ;
         redirect("../admin_main.php?createProd");
     }
     $sql = "SELECT barcode FROM product";
@@ -170,15 +171,62 @@ if (!empty($_GET['search'])) {
             $_SESSION['search_result'] = $result;
             redirect("../admin_main.php?searchOrders");
         }
+    } elseif($_GET['search_by'] == "customer_name"){
+        if(empty($_GET['search_field'])){
+                $session->message("Enter search string.");
+                redirect("../admin_main.php?searchOrders");
+        }
+        $allOrders = Order::findAll();
+        $orders = array();
+        foreach ($allOrders as $order) {
+            $order->customer_info = unserialize($order->customer_info);
+        }
+        foreach ($allOrders as $order) {
+            if (strlen(stristr($order->customer_info[0], $_GET['search_field']))) {
+                $orders[] = $order;
+            }
+        }
+        
+//        echo "<pre>";
+//        print_r($orders);
+        if (empty($orders)) {
+            $session->message("No orders found.");
+            redirect("../admin_main.php?searchOrders");
+        } else{
+            $_SESSION['search_result'] = serialize($orders);
+            redirect("../admin_main.php?searchOrders");
+        }
+    }  elseif($_GET['search_by'] == "customer_email"){
+        if(empty($_GET['search_field'])){
+                $session->message("Enter search string.");
+                redirect("../admin_main.php?searchOrders");
+        }
+        $allOrders = Order::findAll();
+        $orders = array();
+        foreach ($allOrders as $order) {
+            $order->customer_info = unserialize($order->customer_info);
+        }
+        foreach ($allOrders as $order) {
+            if (strlen(stristr($order->customer_info[1], $_GET['search_field']))) {
+                $orders[] = $order;
+            }
+        }
+        
+//        echo "<pre>";
+//        print_r($orders);
+        if (empty($orders)) {
+            $session->message("No orders found.");
+            redirect("../admin_main.php?searchOrders");
+        } else{
+            $_SESSION['search_result'] = serialize($orders);
+            redirect("../admin_main.php?searchOrders");
+        }
     } else {
-        foreach ($_GET as $key => $value) {
-            if ($key == "price_from" || $key == "price_to") {
-                continue;
-            } elseif (empty($value)) {
+        if(empty($_GET['search_field'])){
                 $session->message("Enter search string.");
                 redirect("../admin_main.php?searchOrders");
             }
-        }
+        
         $sql = "SELECT * FROM orders WHERE " . $_GET['search_by'] . " = '" . $_GET['search_field'] . "'";
 
         $resultTemp = Order::findBySql($sql);
