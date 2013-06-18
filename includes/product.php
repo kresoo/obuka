@@ -1,6 +1,6 @@
 <?php
 
-class Product extends databaseObject{
+class Model_Product extends databaseObject{
     public $id;
     public $name;
     public $description;

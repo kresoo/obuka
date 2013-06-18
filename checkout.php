@@ -15,7 +15,7 @@ if (isset($_POST['checkout'])) {
 
 $products = array();
 foreach ($ids as $id) {
-    $products[] = Product::findById($id);
+    $products[] = Model_Product::findById($id);
 }
 ?>
 <?php require_once 'includes/header.php'; ?>

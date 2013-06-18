@@ -1,7 +1,7 @@
 <?php require_once 'includes/require.php'; ?>
 <?php
       if(isset($_GET['product_id'])){
-          $product = Product::findById($_GET['product_id']);
+          $product = Model_Product::findById($_GET['product_id']);
       }  
 ?>
 <?php require_once 'includes/header.php'; ?>

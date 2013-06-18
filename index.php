@@ -16,7 +16,7 @@
     $products = array();
     if(!empty($_GET['category_id'])){
         $catId = $_GET['category_id'];
-        $allProd = Product::findAll();
+        $allProd = Model_Product::findAll();
         foreach ($allProd as $product){
             $prodCatTemp = $product->category_id;
             $prodCat = explode(",", $prodCatTemp);
@@ -53,7 +53,7 @@
                     <li class="span12 thumbnail"> <a href="productView.php?product_id=<?php echo $product->id ?>"> <?php echo $product->name ?>  </a> </li>
                 <?php endforeach; ?>
             </ul>
-        <?php } else { $allProducts = Product::findRandomProducts(5); ?>
+        <?php } else { $allProducts = Model_Product::findRandomProducts(5); ?>
             <div style="margin:0 auto;width:800px;">
             <?php foreach ($allProducts as $product): ?>
         

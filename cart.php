@@ -8,7 +8,7 @@ if ($session->is_logged_in()) {
 }
 
 if (isset($_POST['addToCart'])) {
-    $product = Product::findById($_POST['product_id']);
+    $product = Model_Product::findById($_POST['product_id']);
 
     if (isset($_SESSION['cart'])) {
         if (array_key_exists($product->id, $_SESSION['cart'])) {
@@ -31,7 +31,7 @@ foreach ($_SESSION['cart'] as $key => $value) {
 }
 $allProducts = array();
 foreach ($ids as $id){
-    $allProducts[] = Product::findById($id);
+    $allProducts[] = Model_Product::findById($id);
 }
 
 if(array_key_exists("addToCart", $_POST)){
